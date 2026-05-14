@@ -1,18 +1,42 @@
-import { MkButton } from 'moldekit-react';
+import { useAuth } from "react-oidc-context";
 
 function App() {
+    const auth = useAuth();
 
-  return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="font-bold text-center text-4xl">mangos</h1>
-      <h2 className="text-center text-2xl">under construction !</h2>
+    const signOutRedirect = () => {
+        const clientId = import.meta.env.VITE_CLIENT_ID;
+        const logoutUri = import.meta.env.VITE_LOGOUTUri;
+        const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN;
+        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    };
 
-        <MkButton iconName="home" variant="filled" color="primary" onClick={() => alert('clicked')}>
-          Home
-        </MkButton>
+    if (auth.isLoading) {
+        return <div>Loading...</div>;
+    }
 
-    </section>
-  )
+    if (auth.error) {
+        return <div>Encountering error... {auth.error.message}</div>;
+    }
+
+    if (auth.isAuthenticated) {
+        return (
+            <div>
+                <pre> Hello: {auth.user?.profile.email} </pre>
+                <pre> ID Token: {auth.user?.id_token} </pre>
+                <pre> Access Token: {auth.user?.access_token} </pre>
+                <pre> Refresh Token: {auth.user?.refresh_token} </pre>
+
+                <button onClick={() => auth.removeUser()}>Sign out</button>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <button onClick={() => auth.signinRedirect()}>Sign in</button>
+            <button onClick={() => signOutRedirect()}>Sign out</button>
+        </div>
+    );
 }
 
-export default App
+export default App;
