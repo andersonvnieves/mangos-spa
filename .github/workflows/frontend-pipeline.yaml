@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '**'
-      - '.github/workflows/frontend-pipeline.yaml'
 
 jobs:
   build-and-deploy:
@@ -22,7 +19,7 @@ jobs:
         node-version: '20'
 
     - name: Install dependencies
-      working-directory: frontend
+      working-directory: .
       run: npm install
 
     - name: Create .env file
