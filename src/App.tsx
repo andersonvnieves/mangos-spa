@@ -1,15 +1,11 @@
 import { useAuth } from "react-oidc-context";
 import { MkButton } from 'moldekit-react';
+import LandingPage from "./landing/pages/LandingPage.tsx";
 
 function App() {
     const auth = useAuth();
 
-    const signOutRedirect = () => {
-        const clientId = "5tu7j65i3d66r1qtrlu8k7os91";
-        const logoutUri = "http://localhost:5173/";
-        const cognitoDomain = "https://sa-east-1oechf8sjw.auth.sa-east-1.amazoncognito.com";
-        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-    };
+
 
     if (auth.isLoading) {
         return <div>Loading...</div>;
@@ -36,12 +32,7 @@ function App() {
         );
     }
 
-    return (
-        <div>
-            <button onClick={() => auth.signinRedirect()}>Sign in</button>
-            <button onClick={() => signOutRedirect()}>Sign out</button>
-        </div>
-    );
+    return (<LandingPage auth={auth}/>);
 }
 
 export default App;
