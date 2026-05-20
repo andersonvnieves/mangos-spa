@@ -1,5 +1,5 @@
 
-function MangosLogo({ collapsed = true }: { collapsed: boolean }) {
+function MangosLogo({ collapsed = true }: { collapsed?: boolean }) {
     const collapsedStyles = [
         "w-[50px] h-[50px]",
         "flex items-center justify-center",
