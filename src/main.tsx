@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { AuthProvider } from "react-oidc-context";
-import App from './App.tsx'
+import App from './app/App.tsx'
 
 const cognitoAuthConfig = {
     authority: import.meta.env.VITE_COGNITO_AUTHORITY,
@@ -10,6 +10,13 @@ const cognitoAuthConfig = {
     redirect_uri: import.meta.env.VITE_COGNITO_REDIRECT_URI,
     response_type: import.meta.env.VITE_COGNITO_RESPONSE_TYPE,
     scope: import.meta.env.VITE_COGNITO_SCOPE,
+    onSigninCallback: () => {
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+    },
 };
 
 createRoot(document.getElementById('root')!).render(

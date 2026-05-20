@@ -1,2 +1,6 @@
 @import 'tailwindcss';
 @import 'moldekit-react/css';
+
+body {
+    background-color: var(--color-neutral-50);
+}
