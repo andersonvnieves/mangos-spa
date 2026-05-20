@@ -1,12 +1,10 @@
 import type {AppLayoutProps} from "./AppLayout.props.ts";
 import {
-    MkButton,
     MkDivider,
     MkDrawer,
     MkDropdown,
     MkMain,
     MkNavItem,
-    MkNavList,
     MkTopBar,
     MkUserAvatar
 } from "moldekit-react";
@@ -47,10 +45,10 @@ function AppLayout({ children }: AppLayoutProps) {
             }
         >
             <nav className="flex flex-col p-2">
-                <MkNavItem label={"Conta de Usuário"} />
-                <MkNavItem label={"Configurações"} />
+                <MkNavItem label={"Conta de Usuário"} link={""}/>
+                <MkNavItem label={"Configurações"} link={""}/>
                 <MkDivider/>
-                <MkNavItem label={"Sair"} onClick={() => auth.removeUser()}/>
+                <MkNavItem label={"Sair"} onClick={() => auth.removeUser()} link={""}/>
             </nav>
         </MkDropdown>}
         ><MangosLogo/>
