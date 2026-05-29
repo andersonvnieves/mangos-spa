@@ -16,7 +16,7 @@ function App() {
 
             try {
                 const response = await fetch(
-                    "https://api.mangos.avn.dev.br/dev/",
+                    "https://api.mangos.avn.dev.br/",
                     {
                         method: "GET",
                         headers: {
