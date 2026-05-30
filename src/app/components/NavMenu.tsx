@@ -1,4 +1,5 @@
 import {MkDivider, type MkNavItemProps, MkNavList} from "moldekit-react";
+import { NavLink } from "react-router-dom";
 type NavMenuProps = {
     collapsed: boolean;
 }
@@ -8,14 +9,14 @@ function NavMenu({collapsed}: NavMenuProps) {
         {
             label: "Home",
             iconName: "home",
-            link: "http://google.com",
-            isActive: true,
+            link: "/",
+            as: NavLink,
         },
         {
             label: "Visão Geral",
             iconName: "layout-dashboard",
-            link: "http://google.com",
-            isActive: false,
+            link: "/overview",
+            as: NavLink,
         },
         {
             label: "Recebimentos",

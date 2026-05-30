@@ -1,11 +1,9 @@
-import type { AuthContextProps } from "react-oidc-context";
+import {useAuth} from "react-oidc-context";
 import LandingPageHeader from "../components/LandingPageHeader.tsx";
 
-type LandingPageProps = {
-    auth: AuthContextProps;
-};
+function LandingPage() {
+    const auth = useAuth();
 
-function LandingPage({ auth }: LandingPageProps) {
     return (
         <div className="min-h-screen bg-white">
             <LandingPageHeader auth={auth}/>
