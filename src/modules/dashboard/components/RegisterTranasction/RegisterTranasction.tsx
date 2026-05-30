@@ -62,13 +62,13 @@ function RegisterTransaction() {
         }
     };
 
-
+//onChange={(e) => setAmount(e.target.value)}
     const form = <>
         <div className="w-[350px] h-[400px] flex items-start">
             <MkTextInput
                 placeholder="R$ 0,00"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+
             />
         </div>
 
