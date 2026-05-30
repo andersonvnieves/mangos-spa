@@ -1,4 +1,3 @@
-import type {AppLayoutProps} from "./AppLayout.props.ts";
 import {
     MkDivider,
     MkDrawer,
@@ -15,14 +14,15 @@ import NavMenu from "../components/NavMenu.tsx";
 import LeftSidebar from "../components/LeftSidebar.tsx";
 import {useAuth} from "react-oidc-context";
 import MangosLogo from "../components/MangosLogo.tsx";
+import {Outlet} from "react-router-dom";
 
-function AppLayout({ children }: AppLayoutProps) {
+function AppLayout() {
     const isMobile = useMediaQuery("(max-width: 768px)");
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
     const auth = useAuth();
 
-    return (<div className={isMobile ? "flex flex-col" : "flex flex-row"}>
-
+    return (
+        <div className={isMobile ? "flex flex-col" : "flex flex-row"}>
         <MkDrawer
             position={"left"}
             open={mobileDrawerOpen}
@@ -55,7 +55,7 @@ function AppLayout({ children }: AppLayoutProps) {
         </MkTopBar> }
 
         { !isMobile && <LeftSidebar className={"pt-4 pb-4 pl-4 pr-2"}/>}
-        <section className={`flex-1 pt-4 pb-4 ${ isMobile ? "pl-4" : "pl-2" } pr-4`}><MkMain>{children}</MkMain></section>
+        <section className={`flex-1 pt-4 pb-4 ${ isMobile ? "pl-4" : "pl-2" } pr-4`}><MkMain><Outlet /></MkMain></section>
     </div>)
 }
 
