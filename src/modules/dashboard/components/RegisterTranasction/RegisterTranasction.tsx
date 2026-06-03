@@ -12,7 +12,7 @@ function RegisterTransaction() {
     const [isSaving, setIsSaving] = useState(false);
 
     const resetForm = () => {
-        setAmount("100");
+        setAmount("0");
     };
 
     const handleCancel = () => {
@@ -68,7 +68,7 @@ function RegisterTransaction() {
             <MkTextInput
                 placeholder="R$ 0,00"
                 value={amount}
-
+                onChange={(e) => setAmount(e.target.value)}
             />
         </div>
 
