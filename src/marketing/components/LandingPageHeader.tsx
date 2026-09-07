@@ -46,8 +46,8 @@ function LandingPageHeader({auth}: LandingPageHeaderProps) {
                           }
                       >
                           <nav className="flex flex-col p-2">
-                              <MkNavItem label={"Entrar"} onClick={() => auth.signinRedirect()} link={""}/>
-                              <MkNavItem label={"Criar Conta"} onClick={signUpRedirect} link={""}/>
+                              <MkNavItem label={"Entrar"} onClick={(e) => { e.preventDefault(); auth.signinRedirect(); }} link={""}/>
+                              <MkNavItem label={"Criar Conta"} onClick={(e) => { e.preventDefault(); signUpRedirect(); }} link={""}/>
                               <MkDivider/>
                               <MkNavItem label={"GitHub Repo"} link={"https://github.com/andersonvnieves/mangos-spa"} color={"neutral"}/>
                           </nav>

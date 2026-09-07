@@ -9,6 +9,13 @@ children,
 }) {
     const auth = useAuth();
 
+    switch (auth.activeNavigator) {
+        case "signinSilent":
+            return <div>Signing you in...</div>;
+        case "signoutRedirect":
+            return <div>Signing you out...</div>;
+    }
+
     if (auth.isLoading) {
         return <section className="flex flex-col items-center justify-center min-h-svh gap-2">
             <MkSpinner color={"primary"} size={"xl"}/> <span className={"mk-label"}>Loading...</span>
@@ -17,7 +24,7 @@ children,
 
     if (auth.error) {
         return <section className="flex flex-col items-center justify-center min-h-svh gap-2">
-            <span className={"mk-label"}>Encountering error... {auth.error.message}</span>
+            <span className={"mk-label"}>Oops... {auth.error.source} caused {auth.error.message}</span>
         </section>;
     }
 
