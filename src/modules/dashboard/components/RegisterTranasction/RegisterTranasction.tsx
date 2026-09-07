@@ -1,6 +1,15 @@
 import {useState} from "react";
 import {useMediaQuery} from "../../../../shared/hooks/UseMediaQuery.ts";
-import {MkBottomSheet, MkButton, MkModal, MkSubHeader, MkTextInput} from "moldekit-react";
+import {
+    MkBottomSheet,
+    MkButton,
+    MkComboBox,
+    MkModal,
+    MkStepper,
+    MkTab,
+    MkTag,
+    MkTextInput
+} from "moldekit-react";
 import {useAuth} from "react-oidc-context";
 
 function RegisterTransaction() {
@@ -62,14 +71,59 @@ function RegisterTransaction() {
         }
     };
 
-//onChange={(e) => setAmount(e.target.value)}
     const form = <>
-        <div className="w-[350px] h-[400px] flex items-start">
-            <MkTextInput
-                placeholder="R$ 0,00"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+        <span className={"mk-label text-center block"}>registrar transação</span>
+        <span className={"mk-content text-center block"}>1/3 Informações de Pagamento</span>
+        <MkStepper
+            currentStep={1}
+            steps={3}
+        />
+        <div className="w-[350px] flex flex-col items-start gap-4">
+            <span>Valor</span>
+            <MkTextInput placeholder="R$ 0,00" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <span>Descrição</span>
+            <MkTextInput placeholder="Descrição..." value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <span>Tipo de Operação</span>
+            <MkTab
+                data={[
+                    'Crédito',
+                    'Débito'
+                ]}
+                selectedTab={0}
             />
+            <span>Meio Utilizado</span>
+            <MkComboBox
+                list={[
+                    {
+                        label: 'Item1',
+                        value: '0'
+                    },
+                    {
+                        label: 'Item2',
+                        value: '1'
+                    },
+                    {
+                        label: 'Item3',
+                        value: '2'
+                    }
+                ]}
+                size="md"
+            />
+            <div>
+                <span>Categoria</span>
+                <MkTag
+                    data={[
+                        {
+                            id: '01',
+                            label: 'Category 1'
+                        },
+                        {
+                            id: '03',
+                            label: 'Category 2'
+                        }
+                    ]}
+                />
+            </div>
         </div>
 
 
@@ -83,22 +137,20 @@ function RegisterTransaction() {
     return (<>
         { !isMobile &&
             <>
-                <MkButton iconOnly={true} iconName={"plus"} variant={"filled"} color={"primary"} onClick={() => setOpen(true)} />
+                <MkButton iconOnly={false} size={"md"} iconName={"plus"} variant={"filled"} color={"primary"} onClick={() => setOpen(true)}>Add</MkButton>
                 <MkModal open={open} onClose={() => setOpen(false)}>
-                    <MkSubHeader title="Nova Transação" subtitle="Cartão de Crédito" />
                     {form}
                 </MkModal>
             </>
         }
 
         {isMobile && <>
-            <MkButton iconOnly={true} iconName={"plus"} variant={"filled"} color={"primary"} onClick={() => setBsOpen(true)} />
+            <MkButton iconOnly={false} size={"md"} iconName={"plus"} variant={"filled"} color={"primary"} onClick={() => setBsOpen(true)}>Add</MkButton>
             <MkBottomSheet
                 open={openBs}
                 height="lg"
                 onClose={() => setBsOpen(false)}
             >
-                <MkSubHeader title="Nova Transação" subtitle="Cartão de Crédito" />
                 {form}
             </MkBottomSheet>
         </>}

@@ -24,7 +24,7 @@ function LeftSidebar( { className }: { className?: string }) {
                 <MkNavItem label={"Conta de Usuário"} link={""}/>
                 <MkNavItem label={"Configurações"} link={""}/>
                 <MkDivider/>
-                <MkNavItem label={"Sair"} onClick={() => auth.removeUser()} link={""}/>
+                <MkNavItem label={"Sair"} onClick={(e) => { e.preventDefault(); auth.removeUser(); }} link={""}/>
             </MkDropdown>
 
         </div>
