@@ -21,10 +21,12 @@ function LeftSidebar( { className }: { className?: string }) {
         <div className={"flex flex-col gap-3 items-center"}>
             <MkDivider/>
             <MkDropdown trigger={<MkUserAvatar initials={"AV"}/>} align={"left-bottom"}>
-                <MkNavItem label={"Conta de Usuário"} link={""}/>
-                <MkNavItem label={"Configurações"} link={""}/>
-                <MkDivider/>
-                <MkNavItem label={"Sair"} onClick={(e) => { e.preventDefault(); auth.removeUser(); }} link={""}/>
+                <div className="flex flex-col p-2 gap-2">
+                    <MkNavItem label={"Conta de Usuário"} link={""}/>
+                    <MkNavItem label={"Configurações"} link={""}/>
+                    <MkDivider/>
+                    <MkNavItem label={"Sair"} onClick={(e) => { e.preventDefault(); auth.removeUser(); }} link={""}/>
+                </div>
             </MkDropdown>
 
         </div>
