@@ -1,12 +1,23 @@
-import {MkDivider, MkHeader, MkSkeleton} from "moldekit-react";
-import { useState} from "react";
+import {MkDivider, MkHeader, MkSkeleton, MkSubHeader} from "moldekit-react";
+import { useEffect, useState} from "react";
 import RegisterTransaction from "../components/RegisterTranasction/RegisterTranasction.tsx";
 import RecentTranasctions from "../components/RecentTransactions/RecentTranasctions.tsx";
+import {useRightSidebar} from "../../../shared/context/RightSidebarContext.tsx";
 
 function DashboardPage() {
     const [loading, setLoading] = useState(true);
+    const { setContent, clearContent } = useRightSidebar();
 
-
+    useEffect(() => {
+        setContent(
+            <div className="flex flex-col gap-4 p-4">
+                <MkSubHeader title={"Teste"} subtitle={"Teste"}/>
+                <p className="text-sm font-semibold">Resumo do Dashboard</p>
+                <p className="text-xs text-neutral-500">Conteúdo específico do Dashboard aparece aqui.</p>
+            </div>
+        );
+        return () => clearContent();
+    }, [setContent, clearContent]);
 
     return (<>
         <MkHeader title={`Visão Geral`}  subtitle={`Junho de 2026`} className={"mb-5"}>

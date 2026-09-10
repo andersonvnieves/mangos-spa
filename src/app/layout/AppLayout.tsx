@@ -15,11 +15,14 @@ import LeftSidebar from "../components/LeftSidebar.tsx";
 import {useAuth} from "react-oidc-context";
 import MangosLogo from "../components/MangosLogo.tsx";
 import {Outlet} from "react-router-dom";
+import RightSidebar from "../components/RightSidebar.tsx";
+import {RightSidebarProvider, useRightSidebar} from "../../shared/context/RightSidebarContext.tsx";
 
-function AppLayout() {
+function AppLayoutInner() {
     const isMobile = useMediaQuery("(max-width: 768px)");
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
     const auth = useAuth();
+    const { content } = useRightSidebar();
 
     return (
         <div className={isMobile ? "flex flex-col" : "flex flex-row"}>
@@ -44,7 +47,7 @@ function AppLayout() {
                 <MkUserAvatar initials={"AV"}/>
             }
         >
-            <nav className="flex flex-col p-2">
+            <nav className="flex flex-col p-2 gap-2">
                 <MkNavItem label={"Conta de Usuário"} link={""}/>
                 <MkNavItem label={"Configurações"} link={""}/>
                 <MkDivider/>
@@ -54,9 +57,18 @@ function AppLayout() {
         ><MangosLogo/>
         </MkTopBar> }
 
-        { !isMobile && <LeftSidebar className={"pt-4 pb-4 pl-4 pr-2"}/>}
+        { !isMobile && <LeftSidebar className={"pt-4 pb-4 pl-4 pr-2"}/> }
         <section className={`flex-1 pt-4 pb-4 ${ isMobile ? "pl-4" : "pl-2" } pr-4`}><MkMain><Outlet /></MkMain></section>
+        <RightSidebar>{ content }</RightSidebar>
     </div>)
+}
+
+function AppLayout() {
+    return (
+        <RightSidebarProvider>
+            <AppLayoutInner />
+        </RightSidebarProvider>
+    );
 }
 
 export default AppLayout;
