@@ -59,7 +59,7 @@ function AppLayoutInner() {
 
         { !isMobile && <LeftSidebar className={"pt-4 pb-4 pl-4 pr-2"}/> }
         <section className={`flex-1 pt-4 pb-4 ${ isMobile ? "pl-4" : "pl-2" } pr-4`}><MkMain><Outlet /></MkMain></section>
-            { !isMobile && <RightSidebar>{ content }</RightSidebar> }
+        <RightSidebar>{ content }</RightSidebar>
     </div>)
 }
 
